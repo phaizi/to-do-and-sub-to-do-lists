@@ -1,11 +1,25 @@
+import { useState } from 'react'
 import HeaderDesign from './components/HeaderDesign/HeaderDesign'
+import ItemTodo from './components/Checkbox/ItemTodo'
 import './App.css'
 
-function App() {
+const App = () => {
+  // temporary state and will be removed
+  const [isTaskCompleted, setTaskCompleted] = useState(false)
+
+  const onTaskComplete = (taskId, taskName) => {
+    // request to server and then update the isCompleted state
+    setTaskCompleted(true)
+  }
   return (
     <div className="App">
       <HeaderDesign />
       To do list
+      <ItemTodo
+        taskName={'my first task'}
+        isCompleted={isTaskCompleted}
+        onComplete={onTaskComplete}
+      />
     </div>
   )
 }

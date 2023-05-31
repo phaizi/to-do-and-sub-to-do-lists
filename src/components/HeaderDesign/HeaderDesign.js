@@ -2,7 +2,7 @@ import './HeaderDesign.css'
 
 const HeaderDesign = () => {
   return (
-    <div className="Container">
+    <div className="HeaderContainer">
       <div className="HeaderDesign"></div>
     </div>
   )
