@@ -1,0 +1,12 @@
+.Container {
+  overflow: hidden;
+}
+
+.HeaderDesign {
+  position: relative;
+  top:-115px;
+  height: 130px;
+  transform: scaleX(2.5);
+  background-color: #413f3f;
+  border-radius:0 0 50% 50%;
+}
