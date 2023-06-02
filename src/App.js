@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import HeaderDesign from './components/HeaderDesign/HeaderDesign'
-import ItemTodo from './components/Checkbox/ItemTodo'
+import HeaderDesign from './components/uiBasedComponents/HeaderDesign/HeaderDesign'
+import ItemTodo from './components/uiBasedComponents/ItemTodo/ItemTodo'
 import './App.css'
 
 const App = () => {
