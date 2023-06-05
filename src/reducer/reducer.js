@@ -23,7 +23,8 @@ export default function reducer(state, action) {
         (category) => category.id === payload.categoryid,
       )
       category = newState[categoryIndex]
-      categoryCopy = { ...category, Tasks: [...category.Tasks, action.payload] }
+      categoryCopy = { ...category, Tasks: [payload, ...category.Tasks] }
+      // categoryCopy = { ...category, Tasks: [...category.Tasks, payload] }
 
       newState[categoryIndex] = categoryCopy
       return newState

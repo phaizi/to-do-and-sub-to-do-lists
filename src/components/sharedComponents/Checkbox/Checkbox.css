@@ -1,12 +1,3 @@
-.TodoContainer {
-  position:relative;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 9.57209px 17.4038px;
-  gap: 8.7px;
-}
-
 .Checkbox {
   appearance: none;
   width: 19.96px;
@@ -22,25 +13,11 @@
   border: 1.99563px solid #B5B5BA;
 }
 
-.Label {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14.9673px;
-  color: #413F3F;
-  cursor: pointer;
-}
-
-.Label.LabelDeleted {
-  text-decoration-line: line-through;
-  color: #B5B5BA;
-}
-
-.Checkbox:checked + .Label:before {
+.Checkbox:after {
   content: '';
   position: absolute;
-  left: 28px;
-  bottom: 22px;
+  left: 4px;
+  top: 1px;
   width: 4px;
   height: 8px;
   border: solid #F4F4F4;
@@ -48,7 +25,18 @@
   transform: rotate(45deg);
 }
 
-.Checkbox.CheckboxHovered {
+.Checkbox:hover {
   outline:none;
   border: 1.99563px solid #FF4545;
 }
+
+.Checkbox:focus {
+  outline:none;
+  border: 1.99563px solid #FF4545;
+}
+
+.Checkbox:disabled {
+  border: 1.99563px solid #B5B5BA;
+  cursor: auto;
+}
+

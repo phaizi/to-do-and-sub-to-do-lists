@@ -1,0 +1,20 @@
+.numberField {
+  appearance: none;
+  border:none;
+  color:#413F3F;
+  background: #F4F4F4;
+  font-family: Inter;
+  font-style: normal;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: left;
+  cursor: pointer;
+  width: 150px;
+}
+
+.numberField:focus-visible{
+  border:2px solid #FF4545 !important;
+   outline: none !important;
+}

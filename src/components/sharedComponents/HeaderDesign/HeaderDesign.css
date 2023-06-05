@@ -1,5 +1,6 @@
 .HeaderContainer {
   overflow: hidden;
+  max-height: 60px;
 }
 
 .HeaderDesign {

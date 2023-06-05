@@ -1,0 +1,28 @@
+.TodoContainer {
+  position:relative;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 9.57209px 17.4038px;
+  gap: 8.7px;
+}
+
+.Label {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14.9673px;
+  color: #413F3F;
+  cursor: pointer;
+}
+
+.Label.LabelDeleted {
+  text-decoration-line: line-through;
+  color: #B5B5BA;
+  cursor: auto;
+}
+
+/* .Checkbox.CheckboxHovered {
+  outline:none;
+  border: 1.99563px solid #FF4545;
+} */

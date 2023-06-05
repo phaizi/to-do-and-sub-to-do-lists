@@ -36,7 +36,8 @@ const Task = ({ task, dispatch, setLoading }) => {
       >
         complete
       </button>
-      {task.Subtasks.map((subtask) => (
+      {/* {task.Subtasks.map((subtask) => ( */}
+      {[].map((subtask) => (
         <Subtask
           key={subtask.id}
           subtask={subtask}

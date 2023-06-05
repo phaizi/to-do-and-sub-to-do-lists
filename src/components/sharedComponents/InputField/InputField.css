@@ -1,0 +1,44 @@
+.inputContainer {
+  position:relative;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  /* padding: 9.57209px 17.4038px; */
+  padding: 0px !important;
+  gap: 8.7px;
+
+}
+
+.inputField {
+  appearance: none;
+  border:none;
+  color:#413F3F;
+  background: #F4F4F4;
+  font-family: Inter;
+  font-style: normal;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: left;
+  cursor: pointer;
+}
+
+.inputField:focus-visible{
+  border:2px solid #FF4545 !important;
+   outline: none !important;
+}
+
+.inputFieldCheck{
+  position: relative;
+  /* top:11px;
+  right:6px; */
+  appearance: none;
+  min-width: 19.96px;
+  height: 19.96px;
+  border: 1.99563px solid #C4C4C4;
+  border-radius: 5.9869px;
+  transform: translateY(-0.25em);
+  background: #E2E2E2;
+  border: 1.99563px solid #E2E2E2;
+}

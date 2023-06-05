@@ -2,9 +2,9 @@ import './HeaderDesign.css'
 
 const HeaderDesign = () => {
   return (
-    <div className="HeaderContainer">
+    <header className="HeaderContainer">
       <div className="HeaderDesign"></div>
-    </div>
+    </header>
   )
 }
 

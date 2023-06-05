@@ -1,8 +1,7 @@
 import { useState, useEffect, useReducer } from 'react'
-import HeaderDesign from './components/uiBasedComponents/HeaderDesign/HeaderDesign'
-import ItemTodo from './components/uiBasedComponents/ItemTodo/ItemTodo'
+import HeaderDesign from './components/sharedComponents/HeaderDesign/HeaderDesign'
 import './App.css'
-import Loader from './components/uiBasedComponents/Loader/Loader'
+import Loader from './components/sharedComponents/Loader/Loader'
 import Category from './components/mainComponents/Category/Category'
 import reducer from './reducer/reducer'
 import { URL } from './contants/url'
@@ -43,7 +42,6 @@ const App = () => {
     <div className="App">
       {loading && <Loader />}
       <HeaderDesign />
-      To do list
       {todoState.map((category) => (
         <Category
           key={category.id}
@@ -52,11 +50,6 @@ const App = () => {
           setLoading={setLoading}
         />
       ))}
-      <ItemTodo
-        taskName={'my first task'}
-        isCompleted={isTaskCompleted}
-        onComplete={onTaskComplete}
-      />
     </div>
   )
 }
