@@ -29,14 +29,18 @@ export default function reducer(state, action) {
       newState[categoryIndex] = categoryCopy
       return newState
 
-    case 'completeTask': //  payload: {id,categoryid }
+    case 'completeTask': //  payload: {taskid,categoryid }
       categoryIndex = newState.findIndex(
         (category) => category.id === payload.categoryid,
       )
       category = newState[categoryIndex]
       tasksCopy = [...category.Tasks]
-      taskIndex = tasksCopy.findIndex((task) => task.id === payload.id)
-      taskCopy = { ...tasksCopy[taskIndex], isCompleted: true }
+      taskIndex = tasksCopy.findIndex((task) => task.id === payload.taskid)
+      taskCopy = {
+        ...tasksCopy[taskIndex],
+        isCompleted: true,
+        daysRemaining: 0,
+      }
       tasksCopy[taskIndex] = taskCopy
 
       categoryCopy = { ...category, Tasks: tasksCopy }
@@ -63,7 +67,7 @@ export default function reducer(state, action) {
 
       return newState
 
-    case 'completeSubtask': // payload: {id, taskid, categoryid}
+    case 'completeSubtask': // payload: {subtaskid, taskid, categoryid}
       categoryIndex = newState.findIndex(
         (category) => category.id === payload.categoryid,
       )
@@ -72,7 +76,9 @@ export default function reducer(state, action) {
       taskIndex = category.Tasks.findIndex((task) => task.id === payload.taskid)
       task = tasks[taskIndex]
       subtasks = task.Subtasks
-      subTaskIndex = subtasks.findIndex((subtask) => subtask.id === payload.id)
+      subTaskIndex = subtasks.findIndex(
+        (subtask) => subtask.id === payload.subtaskid,
+      )
       subtaskCopy = { ...subtasks[subTaskIndex], isCompleted: true }
       subtasksCopy = [...subtasks]
       subtasksCopy[subTaskIndex] = subtaskCopy
@@ -102,6 +108,7 @@ export default function reducer(state, action) {
       taskCopy = {
         ...task,
         isCompleted: true,
+        daysRemaining: 0,
         Subtasks: subtasksCopy,
       }
       tasksCopy = [...tasks]

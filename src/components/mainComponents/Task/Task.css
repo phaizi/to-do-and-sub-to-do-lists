@@ -1,0 +1,14 @@
+.taskContainer {
+  padding: 10px 17.4038px;
+}
+
+.dueDays {
+  text-align: left;
+  padding-left: 50px;
+  padding-top: 2px;
+}
+
+.subtasksContainer {
+  padding: 15px 10px 10px 60px; 
+  text-align: left;
+}

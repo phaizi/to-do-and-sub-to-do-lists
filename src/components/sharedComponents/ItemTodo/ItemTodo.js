@@ -6,7 +6,7 @@ const ItemTodo = ({ taskId, taskName, isCompleted, onComplete }) => {
     onComplete(taskId, taskName)
   }
   return (
-    <div className="TodoContainer">
+    <div className="todoContainer">
       <Checkbox
         id={taskId}
         checked={isCompleted}
@@ -15,9 +15,8 @@ const ItemTodo = ({ taskId, taskName, isCompleted, onComplete }) => {
       />
 
       <label
-        className={isCompleted ? 'Label LabelDeleted' : 'Label'}
+        className={isCompleted ? 'label labelDeleted' : 'Label'}
         htmlFor={taskId}
-        onClick={onSelect}
       >
         {taskName}
       </label>

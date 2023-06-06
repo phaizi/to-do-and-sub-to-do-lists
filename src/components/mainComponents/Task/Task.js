@@ -1,11 +1,13 @@
 import { memo } from 'react'
 import './Task.css'
 import Subtask from '../Subtask/Subtask'
+import ItemTodo from '../../sharedComponents/ItemTodo/ItemTodo'
+import DueDays from '../../sharedComponents/DueDays/DueDays'
 import { URL } from '../../../contants/url'
 
 const Task = ({ task, dispatch, setLoading }) => {
   const completeTask = async (id, categoryid, e) => {
-    setLoading(true)
+    // setLoading(true)
     const requestOptions = {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
@@ -16,36 +18,44 @@ const Task = ({ task, dispatch, setLoading }) => {
     console.log('data : ', data)
     console.log('id : ', id, categoryid)
     setTimeout(() => {
-      setLoading(false)
+      // setLoading(false)
       dispatch({
-        type: 'completeTask',
-        payload: { id, categoryid },
+        type: 'completeTaskAndAllSubtasks',
+        payload: { taskid: id, categoryid },
       })
     }, 2000)
   }
   console.log('Renrender tasks = ', task.name)
   // console.log('usememo : ', task.id)
   return (
-    <div>
-      <h3>{task.name}</h3>
-      <div>{task.isCompleted}</div>
-      <button
-        onClick={() => {
-          completeTask(task.id, task.categoryid)
+    <div className="taskContainer">
+      <ItemTodo
+        taskId={task.id}
+        taskName={task.name}
+        isCompleted={task.isCompleted}
+        onComplete={(e) => {
+          completeTask(task.id, task.categoryid, e)
         }}
-      >
-        complete
-      </button>
-      {/* {task.Subtasks.map((subtask) => ( */}
-      {[].map((subtask) => (
-        <Subtask
-          key={subtask.id}
-          subtask={subtask}
-          categoryid={task.categoryid}
-          dispatch={dispatch}
-          setLoading={setLoading}
+      />
+      {task.daysRemaining > 0 && (
+        <DueDays
+          className="dueDays"
+          text={`Due in ${task.daysRemaining} days`}
         />
-      ))}
+      )}
+      {task.Subtasks?.length > 0 && (
+        <div className="subtasksContainer">
+          {task.Subtasks.map((subtask) => (
+            <Subtask
+              key={subtask.id}
+              subtask={subtask}
+              categoryid={task.categoryid}
+              dispatch={dispatch}
+              setLoading={setLoading}
+            />
+          ))}
+        </div>
+      )}
     </div>
   )
 }
