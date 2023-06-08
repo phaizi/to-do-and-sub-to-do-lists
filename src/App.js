@@ -3,44 +3,43 @@ import HeaderDesign from './components/sharedComponents/HeaderDesign/HeaderDesig
 import './App.css'
 import Loader from './components/sharedComponents/Loader/Loader'
 import Category from './components/mainComponents/Category/Category'
+import ErrorBar from './components/sharedComponents/ErrorBar/ErrorBar'
 import reducer from './reducer/reducer'
 import { URL } from './contants/url'
 
 const App = () => {
   const [todoState, dispatch] = useReducer(reducer, [])
-  const [error, setError] = useState()
+  const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     ;(async () => {
+      setLoading(true)
       try {
-        setLoading(true)
         const response = await fetch(`${URL}/categories`)
-        const data = await response.json()
-        console.log(data.data)
-
-        setTimeout(() => {
-          dispatch({ type: 'getAllData', payload: data.data })
+        const jsonData = await response.json()
+        if (jsonData.status === 'success') {
+          dispatch({ type: 'getAllData', payload: jsonData.data })
           setLoading(false)
-        }, 2000)
-      } catch (error) {
-        setError(error)
-      } finally {
-        // setLoading(false)
+        } else {
+          setError(jsonData.message)
+          setLoading(false)
+        }
+      } catch (err) {
+        setError(err.toString())
+        setLoading(false)
       }
     })()
   }, [])
 
-  // temporary state and will be removed
-  const [isTaskCompleted, setTaskCompleted] = useState(false)
-
-  const onTaskComplete = (taskId, taskName) => {
-    // request to server and then update the isCompleted state
-    setTaskCompleted(true)
+  const onClose = () => {
+    setError(false)
   }
+
   return (
     <div className="App">
       {loading && <Loader />}
+      {error && <ErrorBar errorMessage={error} onClose={onClose} />}
       <HeaderDesign />
       {todoState.map((category) => (
         <Category
@@ -48,6 +47,7 @@ const App = () => {
           category={category}
           dispatch={dispatch}
           setLoading={setLoading}
+          setError={setError}
         />
       ))}
     </div>

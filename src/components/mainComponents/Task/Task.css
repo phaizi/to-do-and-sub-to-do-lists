@@ -9,6 +9,17 @@
 }
 
 .subtasksContainer {
-  padding: 15px 10px 10px 60px; 
+  display: 'flex';
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0px 0px 10px 50px; 
+  text-align: left;
+}
+.form {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  /* padding: 15px 0px 10px 50px;  */
+  padding: 10px 0px 0px 50px; 
   text-align: left;
 }

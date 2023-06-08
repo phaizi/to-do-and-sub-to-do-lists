@@ -15,3 +15,8 @@
   border:2px solid #FF4545;
    outline: none;
 }
+
+.button:disabled{
+  /* background-color: white; */
+  color:#C4C4C4;
+}

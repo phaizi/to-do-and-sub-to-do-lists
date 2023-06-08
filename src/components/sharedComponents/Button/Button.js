@@ -1,8 +1,13 @@
 import './Button.css'
 
-const Button = ({ children, onSubmit, style }) => {
+const Button = ({ disabled = false, children, onSubmit, style }) => {
   return (
-    <button className="button" onClick={onSubmit} style={style}>
+    <button
+      className="button"
+      disabled={disabled}
+      onClick={onSubmit}
+      style={style}
+    >
       {children}
     </button>
   )

@@ -8,56 +8,66 @@ import NumberField from '../../sharedComponents/NumberField/NumberField'
 import Button from '../../sharedComponents/Button/Button'
 import { URL } from '../../../contants/url'
 
-const Category = ({ category, dispatch, setLoading }) => {
+const Category = ({ category, dispatch, setLoading, setError }) => {
   const taskDivRef = useRef(null)
   const [taskName, setTaskName] = useState('')
-  const [dueDays, setDueDays] = useState(null)
+  const [dueDays, setDueDays] = useState(undefined)
   const [isTaskDisplay, setTaskDisplay] = useState(false)
   const [taskDivHeight, setTaskDivHeight] = useState(0)
   const count = category.Tasks.length
 
   const onTaskNameChange = (e) => {
     setTaskName(e.currentTarget.value)
-    // console.log(taskName)
   }
-  // console.log('RERENDERING category = ', category.name)
   const onDueDaysChange = (e) => {
-    setDueDays(e.currentTarget.value)
-    console.log(dueDays)
+    if (e.currentTarget.value >= 0) {
+      setDueDays(e.currentTarget.value)
+    }
   }
 
-  const onSubmit = async (e) => {
+  const createTaskHandler = async (e) => {
     e.preventDefault()
-    const newTask = {
-      name: taskName,
-      categoryid: category.id,
-      isCompleted: false,
-      daysRemaining: dueDays ? dueDays : 0,
-    }
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newTask),
-    }
-    try {
-      const response = await fetch(`${URL}/tasks`, requestOptions)
-      const { data } = await response.json()
-      data.Subtasks = data.Subtasks || []
-      console.log('this is newTask form server : ', data)
-      dispatch({ type: 'createTask', payload: data })
-      setTimeout(() => {
-        // scrollHeight was not updating on creation
-        // of new task and also not on running useEffect.
-        // so had to put a pause here so that scrollHeight
-        // gets updated in mean while.
-        setTaskDivHeight(taskDivRef.current?.scrollHeight)
+    if (taskName) {
+      const newTask = {
+        name: taskName,
+        categoryid: category.id,
+        isCompleted: false,
+        daysRemaining: dueDays ? dueDays : 0,
+      }
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newTask),
+      }
+      setLoading(true)
+      try {
+        const response = await fetch(`${URL}/tasks`, requestOptions)
+        const jsonData = await response.json()
+        if (jsonData.status === 'success') {
+          jsonData.data.Subtasks = jsonData.data.Subtasks || []
+          dispatch({ type: 'createTask', payload: jsonData.data })
+          setLoading(false)
+          setTimeout(() => {
+            // scrollHeight was not updating on creation
+            // of new task and also not on running useEffect.
+            // so had to put a pause here so that scrollHeight
+            // gets updated in mean while.
+            setTaskDivHeight(taskDivRef.current?.scrollHeight)
+            setDueDays('')
+            setTaskName('')
+          }, 0)
+        } else {
+          setLoading(false)
+          setError(jsonData.message)
+          setDueDays('')
+          setTaskName('')
+        }
+      } catch (err) {
+        setLoading(false)
+        setError(err.toString())
         setDueDays('')
         setTaskName('')
-      }, 0)
-    } catch (err) {
-      setDueDays('')
-      setTaskName('')
-      console.log(err)
+      }
     }
   }
 
@@ -66,7 +76,6 @@ const Category = ({ category, dispatch, setLoading }) => {
     setTaskDisplay((state) => !state)
   }
 
-  console.log('data category : ', category)
   return (
     <section
       style={{
@@ -99,7 +108,6 @@ const Category = ({ category, dispatch, setLoading }) => {
             justifyContent: 'space-between',
             flexWrap: 'wrap',
             padding: '9.57209px 17.4038px',
-            // padding: '100px',
           }}
         >
           <InputField
@@ -113,8 +121,9 @@ const Category = ({ category, dispatch, setLoading }) => {
             onChange={onDueDaysChange}
           />
           <Button
-            onSubmit={onSubmit}
+            onSubmit={createTaskHandler}
             style={{ marginLeft: 8.7, marginBottom: 10 }}
+            disabled={!taskName}
           >
             Create
           </Button>
@@ -125,7 +134,10 @@ const Category = ({ category, dispatch, setLoading }) => {
             key={task.id}
             task={task}
             dispatch={dispatch}
+            setTaskDivHeight={setTaskDivHeight}
+            taskDivRef={taskDivRef}
             setLoading={setLoading}
+            setError={setError}
           />
         ))}
       </div>
