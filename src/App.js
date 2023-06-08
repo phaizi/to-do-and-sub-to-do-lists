@@ -5,7 +5,8 @@ import Loader from './components/sharedComponents/Loader/Loader'
 import Category from './components/mainComponents/Category/Category'
 import ErrorBar from './components/sharedComponents/ErrorBar/ErrorBar'
 import reducer from './reducer/reducer'
-import { URL } from './contants/url'
+
+const URL = process.env.REACT_APP_URL
 
 const App = () => {
   const [todoState, dispatch] = useReducer(reducer, [])

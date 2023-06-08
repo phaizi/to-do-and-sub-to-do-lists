@@ -6,12 +6,13 @@ import Counter from '../../sharedComponents/Counter/Counter'
 import InputField from '../../sharedComponents/InputField/InputField'
 import NumberField from '../../sharedComponents/NumberField/NumberField'
 import Button from '../../sharedComponents/Button/Button'
-import { URL } from '../../../contants/url'
+
+const URL = process.env.REACT_APP_URL
 
 const Category = ({ category, dispatch, setLoading, setError }) => {
   const taskDivRef = useRef(null)
   const [taskName, setTaskName] = useState('')
-  const [dueDays, setDueDays] = useState(undefined)
+  const [dueDays, setDueDays] = useState('')
   const [isTaskDisplay, setTaskDisplay] = useState(false)
   const [taskDivHeight, setTaskDivHeight] = useState(0)
   const count = category.Tasks.length

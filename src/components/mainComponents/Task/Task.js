@@ -5,7 +5,8 @@ import ItemTodo from '../../sharedComponents/ItemTodo/ItemTodo'
 import DueDays from '../../sharedComponents/DueDays/DueDays'
 import InputField from '../../sharedComponents/InputField/InputField'
 import Button from '../../sharedComponents/Button/Button'
-import { URL } from '../../../contants/url'
+
+const URL = process.env.REACT_APP_URL
 
 const Task = ({
   task,

@@ -1,6 +1,7 @@
 import ItemTodo from '../../sharedComponents/ItemTodo/ItemTodo'
 import './Subtask.css'
-import { URL } from '../../../contants/url'
+
+const URL = process.env.REACT_APP_URL
 
 // Not neccessary to wrap this component inside memo as
 // its high probabilty that there would be fewer subtasks
